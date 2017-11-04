@@ -6,8 +6,8 @@ const initState = {
   currentTodo: ''
 };
 
-const TODO_ADD = 'TODO_ADD';
-const TODOS_LOAD = 'TODOS_LOAD';
+export const TODO_ADD = 'TODO_ADD';
+export const TODOS_LOAD = 'TODOS_LOAD';
 const CURRENT_UPDATE = 'CURRENT_UPDATE';
 
 export const updateCurrent = (val) => ({ type: CURRENT_UPDATE, payload: val });
@@ -15,13 +15,14 @@ export const loadTodos = (todos) => ({ type: TODOS_LOAD, payload: todos });
 export const addTodo = (todo) => ({ type: TODO_ADD, payload: todo });
 export const fetchTodos = () => {
   return (dispatch) => {
+    dispatch(showMessage('Loading todos'));
     getTodos()
       .then(todos => dispatch(loadTodos(todos)));
   };
 };
 export const saveTodo = (name) => {
   return (dispatch) => {
-    dispatch(showMessage('Saving todo'))
+    dispatch(showMessage('Saving todo'));
     createTodo(name)
       .then(res => dispatch(addTodo(res)))
   };
